@@ -3,7 +3,7 @@ echo Dang push code len GitHub...
 echo.
 
 REM Thay [username] bang username GitHub cua ban
-set /p username="Nhap username GitHub cua ban: "
+set /p username="hungphuly"
 
 git add .
 git commit -m "App com trua - diem danh hang ngay"
