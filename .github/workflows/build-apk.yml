@@ -1,4 +1,4 @@
-name: Build APK
+name: Build APK - Lunch Registration App
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     
     steps:
     - uses: actions/checkout@v3
@@ -17,15 +18,22 @@ jobs:
       with:
         python-version: '3.11'
     
-    - name: Install Flet
-      run: pip install flet
+    - name: Install Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install flet>=0.24.0
     
     - name: Build APK
       run: |
-        flet build apk --yes
+        flet build apk \
+          --project "Điểm Danh Cơm Trưa" \
+          --description "Ứng dụng quản lý điểm danh ăn trưa" \
+          --org com.hungphuly \
+          --yes
     
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
-        name: app-release
+        name: AppComTrua-APK
         path: build/apk/*.apk
+        if-no-files-found: error
